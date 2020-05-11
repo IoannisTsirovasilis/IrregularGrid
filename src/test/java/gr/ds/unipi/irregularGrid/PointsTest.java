@@ -90,9 +90,9 @@ public class PointsTest extends TestCase
     	for (int i = 0; i < length; i++) {
     		a[i] = new Point(0, Math.random() * length * 10000, i, i, i);
     	}
-    	Points.sort(a, Point.YComparator, axis);
+    	Points.sort(a, Point.XComparator, axis);
     	for (int i = 1; i < a.length; i++) {
-    		assertEquals(true, a[i - 1].getY() <= a[i].getY() && a[i - 1].getXYRank()[axis] == a[i].getXYRank()[axis] - 1);
+    		assertEquals(true, a[i - 1].getX() <= a[i].getX() && a[i - 1].getXYRank()[axis] == a[i].getXYRank()[axis] - 1);
     	}    
     }
 }
