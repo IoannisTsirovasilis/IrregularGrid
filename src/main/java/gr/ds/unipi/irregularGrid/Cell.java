@@ -41,6 +41,10 @@ public class Cell {
 		return points;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("Cell: %d, Number of points: %d", id, points.size());
