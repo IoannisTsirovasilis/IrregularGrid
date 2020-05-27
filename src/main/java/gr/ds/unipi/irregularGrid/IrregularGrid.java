@@ -8,6 +8,11 @@ public class IrregularGrid {
 	// Arrays that maintain the boundaries of the cells along x,y-axes
 	private final double[] xOffset;
 	private final double[] yOffset;
+	private int numberOfEmptyCells = 0;
+	
+	public int getNumberOfEmptyCells() {
+		return numberOfEmptyCells;
+	}
 	
 	public IrregularGrid(double xMin, double yMin, double xMax, double yMax, int averagePointsPerCell, Point[] points) {
 		double dx = xMax - xMin;
@@ -98,23 +103,18 @@ public class IrregularGrid {
 		
 		System.out.println(String.format("Total cells of grid: %dx%d=%d", xSplits, ySplits,xSplits * ySplits));
 		System.out.println(String.format("Mean points per cell: %f", meanPoints));
-		System.out.println(String.format("Variance: %f", Math.sqrt(varPoints)));
-		
-		System.out.print("Y: [");
-		for (int j = 0; j < yOffset.length; j++) {
-			System.out.print(String.format("%f, ", yOffset[j]));
+		System.out.println(String.format("Standard Deviation: %f", Math.sqrt(varPoints)));
+		System.out.println(String.format("Grid shape: %d x %d", ySplits, xSplits));
+	}
+	
+	public void calculateEmptyCells() {
+		for (int i = 0; i < cells.length; i++) {
+			for (int j = 0; j < cells[0].length; j++) {
+				if (cells[i][j] == null || cells[i][j].getPoints().size() == 0) {
+					numberOfEmptyCells++;
+				}
+			}
 		}
-		System.out.println("]");
-		System.out.print("X: [");
-		for (int j = 0; j < xOffset.length; j++) {
-			System.out.print(String.format("%f, ", xOffset[j]));
-		}
-		System.out.println("]");
-		/*System.out.println(String.format("Total points assigned to cells: %d", ep));
-		System.out.println(String.format("Total cells of grid: %d", xSplits * ySplits));
-		System.out.println(String.format("Total cells used: %d", nCells));
-		System.out.println(String.format("Total cells unused: %d", unused));
-		System.out.println(String.format("Grid shape: %d x %d", ySplits, xSplits));*/
 	}
 	
 	public double[] getXOffset() {
